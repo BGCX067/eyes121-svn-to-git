@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/halo" 
+					   creationComplete="initApp()">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import com.eyes121.VO.SettingVO;
+			
+			[Bindable]
+			public var settingVO:SettingVO;
+			
+			private function initApp():void{
+				settingVO = new SettingVO();
+			}
+			
+			private function updateSetting():void{
+				settingVO.workDelay = workDelay.value;
+				settingVO.restDelay = restDelay.value;
+				trace(settingVO.workDelay);
+				trace(settingVO.restDelay);
+			}
+			
+			private function resetSetting():void{
+				settingVO.workDelay = settingVO.DEFAULT_WORKDELAY;
+				settingVO.restDelay = settingVO.DEFAULT_RESTDELAY;
+				trace(settingVO.workDelay);
+				trace(settingVO.restDelay);
+			}
+		]]>
+	</fx:Script>
+	<s:Label x="10" y="111" text="每次休息时长：" height="23" verticalAlign="middle"/>
+	<s:Label x="163" y="111" text="分钟" height="23" verticalAlign="middle"/>
+	<s:Label x="10" y="66" text="工作间隔时长：" height="23" verticalAlign="middle"/>
+	<s:Label x="163" y="66" text="分钟" height="23" verticalAlign="middle"/>
+	<s:NumericStepper x="102" y="66" minimum="20" maximum="55" id="workDelay" value="40"/>
+	<s:Border x="10" y="10" width="432" height="44">
+		<s:Label x="10" y="10" text="Setting-设置" fontSize="24" fontFamily="Verdana" fontWeight="bold"/>
+	</s:Border>
+	<s:NumericStepper x="102" y="111" minimum="5" maximum="15" id="restDelay"  value="5"/>
+	<s:Button x="92" y="165" label="保存" id="save_btn" click="updateSetting()"/>
+	<s:Button x="14" y="165" label="重置" id="reset_btn" click="resetSetting()"/>
+</s:WindowedApplication>
